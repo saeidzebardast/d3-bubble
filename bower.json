@@ -1,0 +1,31 @@
+{
+  "name": "d3-bubble",
+  "version": "0.1.0",
+  "authors": [
+    "Saeid Zebardast <saeid.zebardast@gmail.com>"
+  ],
+  "description": "Bubble chart element for Polymer using d3",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "d3",
+    "graph",
+    "chart"
+  ],
+  "main": "d3-bubble.html",
+  "license": "MIT",
+  "homepage": "https://github.com/saeidzebardast/d3-bubble/",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "d3": "^3.5.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "^3.4.0"
+  }
+}
