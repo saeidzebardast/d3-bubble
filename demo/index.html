@@ -20,28 +20,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <p>An example of <code>&lt;d3-bubble&gt;</code>:</p>
 
-    <p>Make words! <button id="saybtn">Say Something</button></p>
-    <p>Make lasers! <button id="laserbtn">Fire lasers</button></p>
-
-    <d3-bubble author='{"name": "Lord Meowser", "image": "http://lorempixel.com/g/300/200/cats/"}' fancy>
-      <h2>Hello d3-bubble</h2>
+    <d3-bubble height="400px" width="500px">
     </d3-bubble>
 
     <script>
-      var seedElement = document.querySelector('d3-bubble');
+      var d3Bubble = document.querySelector('d3-bubble');
 
-      document.querySelector('#saybtn').addEventListener('click', function() {
-        alert(seedElement.sayHello('Hallo!'));
-      });
-
-      document.querySelector('#laserbtn').addEventListener('click', function() {
-        seedElement.fireLasers();
-      });
-
-      document.addEventListener("d3-bubble-lasers", function(e) {
-        console.log(e.detail.sound);
-      });
-
+      // TODO: Implement setting data here for demo
     </script>
 
   </body>
