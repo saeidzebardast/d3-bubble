@@ -20,13 +20,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <p>An example of <code>&lt;d3-bubble&gt;</code>:</p>
 
-    <d3-bubble height="400px" width="500px">
+    <d3-bubble >
     </d3-bubble>
 
     <script>
-      var d3Bubble = document.querySelector('d3-bubble');
-
-      // TODO: Implement setting data here for demo
+      var el = document.querySelector('d3-bubble');
+      el.set('data', [
+        {
+          key: 'A',
+          value: 11
+        },
+        {
+          key: 'B',
+          value: 15
+        },
+        {
+          key: 'C',
+          value: 6
+        }
+      ]);
     </script>
 
   </body>

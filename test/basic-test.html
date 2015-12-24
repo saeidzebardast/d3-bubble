@@ -26,48 +26,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- You can use the document as a place to set up your fixtures. -->
   <test-fixture id="d3-bubble-fixture">
     <template>
-      <d3-bubble>
-      </d3-bubble>
+      <d3-bubble stop-auto-drawing></d3-bubble>
     </template>
   </test-fixture>
 
   <script>
     suite('<d3-bubble>', function() {
-
       var myEl;
-
       setup(function() {
         myEl = fixture('d3-bubble-fixture');
       });
 
-      // TODO: Impelement tests here
-      /*
-      test('defines the "author" property', function() {
-        assert.equal(myEl.author.name, 'Dimitri Glazkov');
-        assert.equal(myEl.author.image, 'http://addyosmani.com/blog/wp-content/uploads/2013/04/unicorn.jpg');
-      });
-
-      test('says hello', function() {
-        assert.equal(myEl.sayHello(), 'd3-bubble says, Hello World!');
-
-        var greetings = myEl.sayHello('greetings Earthlings');
-        assert.equal(greetings, 'd3-bubble says, greetings Earthlings');
-      });
-
-      test('fires lasers', function(done) {
-        myEl.addEventListener('d3-bubble-lasers', function(event) {
-          assert.equal(event.detail.sound, 'Pew pew!');
-          done();
-        });
-        myEl.fireLasers();
-      });
-
       test('distributed children', function() {
         var els = myEl.getContentChildren();
-        assert.equal(els.length, 1, 'one distributed node');
-        assert.equal(els[0], myEl.querySelector('h2'), 'content distributed correctly');
+        assert.equal(els.length, 0, 'no distributed node');
       });
-      */
     });
   </script>
 

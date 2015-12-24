@@ -28,20 +28,22 @@ Example:
          */
         data: Array,
 
-        /**
-         * Width of chart container.
+        /*
+         * SVG object for d3
          */
-        width: String,
+        svg: {
+          type: Object
+        },
 
         /**
-         * Height of chart container.
+         * Width of chart container in pixel.
          */
-        height: String,
+        width: Number,
 
         /**
-         * Show tooltip of bubbles.
+         * Height of chart container in pixel.
          */
-        showTooltip: Boolean,
+        height: Number,
 
         /**
          * Stop auto drawing the chart on attaching the element.
@@ -53,13 +55,64 @@ Example:
        * Generate and draw chart
        */
       generateChart: function() {
-        // TODO genrate chart here
+        var diameter = '200',
+          format = d3.format(",d"),
+          color = d3.scale.category20c();
+
+        var bubble = d3.layout.pack()
+          .sort(null)
+          .size([this.width, this.height])
+          .padding(1.5);
+
+        var children = {
+          children: this.data
+        };
+
+        var node = d3.select(this.svg)
+          .attr("width", this.width)
+          .attr("height", this.height)
+          .selectAll(".node")
+          .data(bubble.nodes(children)
+            .filter(function(d) {
+              return !d.children;
+            }))
+          .enter().append("g")
+          .attr("class", "node")
+          .attr("transform", function(d) {
+            return "translate(" + d.x + "," + d.y + ")";
+          })
+          .style("fill", function(d) {
+            return color(d.key);
+          })
+          .on("mouseover", function(d, i) {
+            d3.select(this).style("fill", "gold");
+          })
+          .on("mouseout", function() {
+            d3.select(this).style("fill", function(d) {
+              return color(d.key);
+            });
+          });
+
+        node.append("circle")
+          .attr("r", function(d) {
+            return d.r;
+          });
+
+        node.append("text")
+          .attr("dy", ".3em")
+          .style("text-anchor", "middle")
+          .style("fill", "#444")
+          .style("font-size", "0.8em")
+          .text(function(d) {
+            return d.key;
+          });
       },
 
       // Element Lifecycle
 
+      // `ready` is called after all elements have been configured, but
       ready: function() {
-        // `ready` is called after all elements have been configured, but
+        this.set('svg', this.$$('svg'));
         // propagates bottom-up. This element's children are ready, but parents
         // are not.
         //
@@ -68,6 +121,14 @@ Example:
       },
 
       attached: function() {
+        if (!this.height) {
+          this.set('height', Polymer.dom(this).parentNode.offsetHeight);
+        }
+
+        if (!this.width) {
+          this.set('width', Polymer.dom(this).parentNode.offsetWidth);
+        }
+
         if (!this.stopAutoDrawing) {
           this.generateChart();
         }
