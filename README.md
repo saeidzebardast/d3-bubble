@@ -33,5 +33,8 @@ bower install d3-bubble
 ]
 ```
 
+## Demo and Options
+See the [component page](http://saeidzebardast.github.io/d3-bubble/components/d3-bubble/) for demo and options.
+
 ## License
 MIT © [Saeid Zebardast](http://zebardast.com)
