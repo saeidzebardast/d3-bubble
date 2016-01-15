@@ -1,6 +1,8 @@
 # &lt;d3-bubble&gt; [![Build Status](https://travis-ci.org/saeidzebardast/d3-bubble.svg?branch=master)](https://travis-ci.org/saeidzebardast/d3-bubble)
 Bubble chart element for [Polymer](https://www.polymer-project.org) using [d3](http://d3js.org).
 
+![d3-bubble demo](https://raw.githubusercontent.com/saeidzebardast/d3-bubble/master/demo/demo.png "d3-bubble")
+
 ## Install
 
 ```
