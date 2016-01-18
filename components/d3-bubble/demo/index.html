@@ -1,0 +1,68 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>d3-bubble Demo</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="../d3-bubble.html">
+</head>
+
+<body unresolved>
+
+  <p>An example of <code>&lt;d3-bubble&gt;</code>:</p>
+
+  <d3-bubble height="400">
+  </d3-bubble>
+
+  <script>
+    var el = document.querySelector('d3-bubble');
+    el.data = [{
+      key: 'A',
+      value: 44
+    }, {
+      key: 'B',
+      value: 60
+    }, {
+      key: 'C',
+      value: 40
+    }, {
+      key: 'D',
+      value: 64
+    }, {
+      key: 'E',
+      value: 56
+    }, {
+      key: 'F',
+      value: 42
+    }, {
+      key: 'G',
+      value: 36
+    }, {
+      key: 'H',
+      value: 74
+    }, {
+      key: 'I',
+      value: 68
+    }, {
+      key: 'J',
+      value: 51
+    }, {
+      key: 'K',
+      value: 36
+    }];
+  </script>
+
+</body>
+
+</html>

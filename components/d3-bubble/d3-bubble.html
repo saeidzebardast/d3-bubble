@@ -1,0 +1,169 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="d3-import.html">
+
+<!--
+Bubble chart element for Polymer using d3.
+
+Example:
+
+    <d3-bubble data="[[data]]"></d3-bubble>
+
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module id="d3-bubble">
+  <style>
+    .tooltip {
+      position: absolute;
+      padding: 0.5em 1em;
+      font-size: 0.8em;
+      background: black;
+      color: #fff;
+      border-radius: 0.5em;
+      pointer-events: none;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  <template>
+    <svg></svg>
+    <div class="tooltip"></div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'd3-bubble',
+
+      properties: {
+        /**
+         * Data of chart.
+         */
+        data: Array,
+
+        /*
+         * SVG object for d3
+         */
+        svg: {
+          type: Object
+        },
+
+        /**
+         * Width of chart container in pixel.
+         */
+        width: Number,
+
+        /**
+         * Height of chart container in pixel.
+         */
+        height: Number,
+
+        /**
+         * Stop auto drawing the chart on attaching the element.
+         */
+        stopAutoDrawing: Boolean
+      },
+
+      /**
+       * Generate and draw chart
+       */
+      generateChart: function() {
+        var diameter = '200',
+          format = d3.format(",d"),
+          color = d3.scale.category20c();
+
+        var bubble = d3.layout.pack()
+          .sort(null)
+          .size([this.width, this.height])
+          .padding(1.5);
+
+        var children = {
+          children: this.data
+        };
+
+        // Define the div for the tooltip
+        var divTooltip = d3.select(this.$$('.tooltip'));
+
+        var node = d3.select(this.svg)
+          .attr("width", this.width)
+          .attr("height", this.height)
+          .selectAll(".node")
+          .data(bubble.nodes(children)
+            .filter(function(d) {
+              return !d.children;
+            }))
+          .enter().append("g")
+          .attr("class", "node")
+          .attr("transform", function(d) {
+            return "translate(" + d.x + "," + d.y + ")";
+          })
+          .style("fill", function(d) {
+            return color(d.key);
+          })
+          .on("mouseover", function(d, i) {
+            d3.select(this).style("fill", "gold");
+
+            divTooltip.transition()
+              .duration(200)
+              .style("opacity", .9);
+
+            divTooltip.html(d.key + ": " + d.value)
+              .style("left", (d3.event.pageX) + "px")
+              .style("top", (d3.event.pageY - 28) + "px");
+          })
+          .on("mouseout", function() {
+            d3.select(this).style("fill", function(d) {
+              return color(d.key);
+            });
+
+            divTooltip.transition()
+              .duration(500)
+              .style("opacity", 0);
+          });
+
+        node.append("circle")
+          .attr("r", function(d) {
+            return d.r;
+          });
+
+        node.append("text")
+          .attr("dy", ".3em")
+          .style("text-anchor", "middle")
+          .style("fill", "#444")
+          .style("font-size", "0.8em")
+          .text(function(d) {
+            return d.key;
+          });
+      },
+
+      // Element Lifecycle
+
+      // `ready` is called after all elements have been configured, but
+      ready: function() {
+        this.set('svg', this.$$('svg'));
+        // propagates bottom-up. This element's children are ready, but parents
+        // are not.
+        //
+        // This is the point where you should make modifications to the DOM (when
+        // necessary), or kick off any processes the element wants to perform.
+      },
+
+      attached: function() {
+        if (!this.height) {
+          this.set('height', Polymer.dom(this).parentNode.offsetHeight);
+        }
+
+        if (!this.width) {
+          this.set('width', Polymer.dom(this).parentNode.offsetWidth);
+        }
+
+        if (!this.stopAutoDrawing) {
+          this.generateChart();
+        }
+      }
+    });
+  </script>
+</dom-module>
