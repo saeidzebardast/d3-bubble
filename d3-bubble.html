@@ -14,8 +14,24 @@ Example:
 -->
 
 <dom-module id="d3-bubble">
+  <style>
+    .tooltip {
+      position: absolute;
+      padding: 0.5em 1em;
+      font-size: 0.8em;
+      background: black;
+      color: #fff;
+      border-radius: 0.5em;
+      pointer-events: none;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
   <template>
     <svg></svg>
+    <div class="tooltip"></div>
   </template>
 
   <script>
@@ -68,6 +84,9 @@ Example:
           children: this.data
         };
 
+        // Define the div for the tooltip
+        var divTooltip = d3.select(this.$$('.tooltip'));
+
         var node = d3.select(this.svg)
           .attr("width", this.width)
           .attr("height", this.height)
@@ -86,11 +105,23 @@ Example:
           })
           .on("mouseover", function(d, i) {
             d3.select(this).style("fill", "gold");
+
+            divTooltip.transition()
+              .duration(200)
+              .style("opacity", .9);
+
+            divTooltip.html(d.key + ": " + d.value)
+              .style("left", (d3.event.pageX) + "px")
+              .style("top", (d3.event.pageY - 28) + "px");
           })
           .on("mouseout", function() {
             d3.select(this).style("fill", function(d) {
               return color(d.key);
             });
+
+            divTooltip.transition()
+              .duration(500)
+              .style("opacity", 0);
           });
 
         node.append("circle")
