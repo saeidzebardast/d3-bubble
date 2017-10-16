@@ -1,0 +1,42 @@
+{
+  "id": "d3-bubble",
+  "viewports": [
+    {
+      "label": "standard",
+      "width": 1024,
+      "height": 768
+    }
+  ],
+  "scenarios": [
+    {
+      "label": "Simple chart",
+      "url": "./test/visual/d3-bubble.html",
+      "selectors": ["d3-bubble"],
+      "delay": 100,
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0.1,
+      "requireSameDimensions": true
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
+    "bitmaps_test": "backstop_data/bitmaps_test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
+  },
+  "report": ["browser"],
+  "engine": "chrome",
+  "engineFlags": [
+    "--incognito",
+    "--disable-web-security",
+    "--user-data-dir",
+    "--disable-gpu",
+    "--force-device-scale-factor=1",
+    "--disable-infobars=true"
+  ],
+  "asyncCaptureLimit": 5,
+  "asyncCompareLimit": 50,
+  "debug": false,
+  "debugWindow": false
+}

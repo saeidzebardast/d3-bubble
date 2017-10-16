@@ -14,22 +14,26 @@ Example:
 -->
 
 <dom-module id="d3-bubble">
-  <style>
-    .tooltip {
-      position: absolute;
-      padding: 0.5em 1em;
-      font-size: 0.8em;
-      background: black;
-      color: #fff;
-      border-radius: 0.5em;
-      pointer-events: none;
-      opacity: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  </style>
   <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .tooltip {
+        position: absolute;
+        padding: 0.5em 1em;
+        font-size: 0.8em;
+        background: black;
+        color: #fff;
+        border-radius: 0.5em;
+        pointer-events: none;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
     <svg></svg>
     <div class="tooltip"></div>
   </template>
